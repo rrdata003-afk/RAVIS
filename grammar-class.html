@@ -7,12 +7,228 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --navy: #14213d;
+            --navy-dark: #0b132b;
+            --orange: #f28c28;
+            --orange-soft: #ffd7a8;
+            --bg: #f7f7f4;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --muted: #64748b;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f8fafc;
             margin: 0;
             padding: 0;
             color: #334155;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(33, 88, 207, 0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(242, 140, 40, 0.2);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-text small {
+            color: var(--orange);
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-top: 0.15rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            font-weight: 500;
+            color: var(--muted);
+            align-items: center;
+        }
+
+        .nav-links a {
+            padding: 0.65rem 0.9rem;
+            border-radius: 999px;
+            color: var(--navy);
+            text-decoration: none;
+            transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease, text-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 999px;
+            opacity: 0;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.14), rgba(14, 165, 233, 0.18));
+            transition: opacity 0.25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: #ffffff;
+            text-shadow: 0 0 18px rgba(236, 72, 153, 0.8), 0 0 24px rgba(14, 165, 233, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a:focus::after {
+            opacity: 1;
+        }
+
+        .nav-toggle {
+            display: none;
+            width: 42px;
+            height: 36px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            display: grid;
+            gap: 6px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .nav-toggle span {
+            width: 100%;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ec4899, #0ea5e9);
+            box-shadow: 0 0 12px rgba(236, 72, 153, 0.6), 0 0 18px rgba(14, 165, 233, 0.4);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .navbar.nav-open .nav-toggle span:nth-child(1) {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        .navbar.nav-open .nav-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar.nav-open .nav-toggle span:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        @media (min-width: 720px) {
+            .nav-links {
+                display: flex !important;
+            }
+
+            .nav-toggle {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-toggle {
+                display: grid;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                margin: 0;
+                background: rgba(255, 255, 255, 0.96);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+                padding: 1rem 1rem 1.2rem;
+                border-bottom-left-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+                box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+                display: none;
+            }
+
+            .navbar.nav-open .nav-links {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+                color: var(--navy);
+                text-align: center;
+            }
+
+            .navbar {
+                padding: 1rem 1rem 0.5rem;
+                align-items: flex-start;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.75rem;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                padding: 0;
+                transform: translateY(-12px);
+                transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease, padding 0.35s ease;
+            }
+
+            .navbar.nav-open .nav-links {
+                max-height: 420px;
+                opacity: 1;
+                padding: 0.75rem 0 0.5rem;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                justify-content: center;
+                padding: 0.95rem 1.25rem;
+            }
+
+            .brand {
+                justify-content: space-between;
+                width: 100%;
+            }
         }
 
         .poster-container {
@@ -27,6 +243,90 @@
             display: flex;
             flex-direction: column;
             margin: 2rem auto;
+        }
+
+        @media (min-width: 1200px) {
+            .poster-container {
+                max-width: 1440px;
+                min-height: 760px;
+                margin: 2.5rem auto;
+            }
+
+            .poster-header {
+                padding: 2.5rem 4rem;
+            }
+
+            .poster-content {
+                padding: 0 4rem 3.5rem 4rem;
+                gap: 2.5rem;
+            }
+
+            .hero-left {
+                flex: 1 1 480px;
+                max-width: 760px;
+            }
+
+            .hero-right {
+                flex: 1 1 420px;
+                min-height: 500px;
+                max-width: 680px;
+            }
+
+            .hero-image-bg {
+                width: 620px;
+                height: 620px;
+                left: 50%;
+                top: 42%;
+            }
+
+            .hero-title {
+                font-size: clamp(4.2rem, 4vw, 7rem);
+            }
+
+            .hero-quote-text {
+                font-size: clamp(2.6rem, 4vw, 4rem);
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .poster-container {
+                max-width: 1800px;
+                min-height: 840px;
+            }
+
+            .poster-header {
+                padding: 3rem 5rem;
+            }
+
+            .poster-content {
+                padding: 0 5rem 4rem 5rem;
+                gap: 3rem;
+            }
+
+            .hero-left {
+                flex: 1 1 520px;
+                max-width: 840px;
+            }
+
+            .hero-right {
+                min-height: 560px;
+                max-width: 760px;
+            }
+
+            .hero-image-bg {
+                width: 720px;
+                height: 720px;
+                left: 50%;
+                top: 44%;
+            }
+
+            .hero-title {
+                font-size: clamp(4.8rem, 3vw, 8rem);
+            }
+
+            .hero-quote-text {
+                font-size: clamp(2.8rem, 3.5vw, 4.4rem);
+            }
         }
 
         /* Decorative background elements */
@@ -304,6 +604,30 @@
             transform: translateY(-2px);
         }
 
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+            color: white;
+            background: linear-gradient(90deg, #6366f1, #ec4899, #f59e0b);
+            box-shadow: 0 0 18px rgba(99,102,241,0.55), 0 0 32px rgba(236,72,153,0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.45), transparent 35%);
+            opacity: 0.65;
+            pointer-events: none;
+            filter: blur(8px);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(99,102,241,0.75), 0 0 40px rgba(236,72,153,0.45);
+        }
+
         .hero-right {
             flex: 1 1 360px;
             position: relative;
@@ -492,6 +816,26 @@
     </style>
 </head>
 <body>
+    <header class="navbar">
+        <a href="index.html#top" class="brand">
+            <img src="Asset/channel%20logo-2.png" alt="Target English logo" class="brand-logo">
+            <span class="brand-text">Target English <small>Mock Test Platform</small></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-links">
+            <a href="index.html#classes">Classes</a>
+            <a href="index.html#videos">Videos</a>
+            <a href="index.html#batches">Batches</a>
+            <a href="index.html#materials">Study Material</a>
+            <a href="index.html#audio">Audio Lessons</a>
+            <a href="index.html#chat">AI Chat</a>
+            <a href="login.html" class="btn btn-secondary small btn-glow nav-login">Login</a>
+        </nav>
+    </header>
 
     <!-- Hero / Poster Section -->
     <div class="poster-container mx-auto">
@@ -539,6 +883,7 @@
                 <div class="hero-actions">
                     <a href="#syllabus" class="btn-primary">Join Now</a>
                     <a href="grammar-class-video-soon.html" class="btn-secondary">Video Lessons</a>
+                    <a href="index.html" class="btn-secondary btn-glow">Back to Home</a>
                 </div>
             </div>
 
@@ -926,6 +1271,28 @@
             </div>
         </div>
     </section>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        if (navToggle && navbar) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navbar.classList.toggle('nav-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                if (navbar.classList.contains('nav-open')) {
+                    navbar.classList.remove('nav-open');
+                    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

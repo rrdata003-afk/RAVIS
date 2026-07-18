@@ -1,906 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Mock Test Series - Bihar Board Class 12</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Mock Test | Bihar Board Class 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
+        :root {
+            color-scheme: light;
+            --primary: #2563eb;
+            --secondary: #14b8a6;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 25px 50px rgba(15, 23, 42, 0.12);
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #2563EB;
-            --secondary: #14B8A6;
-            --accent: #F59E0B;
-            --background: #F8FAFC;
-            --success: #22C55E;
-            --danger: #EF4444;
-            --dark: #0F172A;
-            --muted: #64748B;
-            --light-bg: #E0E7FF;
-        }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--background);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
         }
 
-        /* ==================== NAVBAR ==================== */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        a {
+            text-decoration: none;
         }
 
-        .navbar-brand {
-            font-weight: 800;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .page-shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 18px 48px;
         }
 
-        .nav-link {
-            font-weight: 600;
-            color: var(--dark) !important;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .navbar-toggler {
-            border: none;
-        }
-
-        .navbar-toggler:focus {
-            box-shadow: none;
-            outline: 2px solid var(--primary);
-        }
-
-        /* ==================== HERO SECTION ==================== */
-        .hero-section {
-            background: linear-gradient(135deg, var(--light-bg) 0%, rgba(20, 184, 166, 0.05) 100%);
-            padding: 80px 20px;
-            position: relative;
+        .poster-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
+            border-radius: 28px;
             overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -5%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        .hero-content {
+            box-shadow: var(--shadow);
             position: relative;
-            z-index: 2;
+            margin-bottom: 2.5rem;
+        }
+
+        .blob-top-right,
+        .blob-bottom-left {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .blob-top-right {
+            top: -120px;
+            right: -120px;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(37,99,235,0.14) 0%, rgba(255,255,255,0) 72%);
+        }
+
+        .blob-bottom-left {
+            bottom: -140px;
+            left: -120px;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(20,184,166,0.14) 0%, rgba(255,255,255,0) 70%);
+        }
+
+        .poster-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 2.2rem 3rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img,
+        .board-logo {
+            width: auto;
+            height: 70px;
+            border-radius: 20px;
+            background: white;
+            padding: 0.75rem;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        .header-text {
+            text-align: right;
+        }
+
+        .header-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .header-subtitle {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        .poster-content {
+            display: flex;
+            gap: 2rem;
+            padding: 0 3rem 3rem;
+            position: relative;
+            z-index: 1;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-left {
+            flex: 1 1 430px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(37,99,235,0.08);
+            border: 1px solid rgba(37,99,235,0.16);
+            border-radius: 9999px;
+            padding: 0.8rem 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.08em;
+            font-size: 0.95rem;
+            width: fit-content;
         }
 
         .hero-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 5vw, 4.8rem);
+            line-height: 0.95;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            animation: slideUp 0.8s ease-out;
+            margin: 0;
+            letter-spacing: -0.04em;
+            color: var(--text);
         }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--muted);
-            margin-bottom: 40px;
+        .hero-title span {
+            background: linear-gradient(90deg, #2563eb, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-quote {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(37,99,235,0.16);
+            border-radius: 28px;
+            padding: 1.5rem 1.6rem;
+            position: relative;
+            max-width: 730px;
+        }
+
+        .hero-quote-text {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            line-height: 1.05;
+            font-weight: 700;
+        }
+
+        .hero-copy {
             max-width: 700px;
-            animation: slideUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero-illustration {
-            max-width: 100%;
-            height: auto;
-            animation: slideUp 0.8s ease-out 0.4s both;
-        }
-
-        .hero-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .hero-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            animation: slideUp 0.8s ease-out forwards;
-        }
-
-        .hero-card:nth-child(1) { animation-delay: 0.2s; }
-        .hero-card:nth-child(2) { animation-delay: 0.3s; }
-        .hero-card:nth-child(3) { animation-delay: 0.4s; }
-        .hero-card:nth-child(4) { animation-delay: 0.5s; }
-
-        .hero-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-            border-color: var(--primary);
-        }
-
-        .hero-card-icon {
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-
-        .hero-card-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 10px 0;
-        }
-
-        .hero-card-label {
-            font-size: 0.9rem;
             color: var(--muted);
-            font-weight: 600;
+            line-height: 1.85;
+            font-size: 1.02rem;
         }
 
-        /* ==================== TEST SETS SECTION ==================== */
-        .test-sets-section {
-            padding: 80px 20px;
-            background: var(--background);
-        }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 50px;
-            text-align: center;
-            animation: slideUp 0.8s ease-out;
-        }
-
-        .test-sets-grid {
+        .hero-badges {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            animation: fadeIn 0.8s ease-out 0.2s both;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .hero-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 1rem 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(148,163,184,0.18);
+            box-shadow: 0 16px 40px rgba(15,23,42,0.06);
+        }
+
+        .hero-badge-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            background: rgba(37,99,235,0.08);
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .hero-badge-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            padding: 0.95rem 1.75rem;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 18px 45px rgba(37,99,235,0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 60px rgba(37,99,235,0.32);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.92);
+            color: var(--text);
+            border: 1px solid rgba(37,99,235,0.18);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(37,99,235,0.08);
+            transform: translateY(-2px);
+        }
+
+        .btn-glow {
+            background: linear-gradient(90deg, #2563eb, #14b8a6, #22c55e);
+            color: white;
+            box-shadow: 0 0 22px rgba(37,99,235,0.4), 0 0 36px rgba(20,184,166,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.45), transparent 32%);
+            opacity: 0.65;
+            pointer-events: none;
+            filter: blur(8px);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(37,99,235,0.55), 0 0 48px rgba(20,184,166,0.35);
+        }
+
+        .hero-right {
+            flex: 1 1 360px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 420px;
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at center, rgba(37,99,235,0.18), transparent 45%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .offer-card {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            border-radius: 32px;
+            background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%);
+            box-shadow: 0 30px 80px rgba(15,23,42,0.14);
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .offer-card h3 {
+            margin: 0 0 1rem;
+            font-size: 1.75rem;
+            color: var(--text);
+        }
+
+        .offer-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-bar {
+            max-width: 5xl;
+            margin: -5rem auto 2rem;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .course-summary {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: 0 18px 45px rgba(15,23,42,0.08);
+            padding: 1.35rem 1.75rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .course-summary div {
+            text-align: center;
+        }
+
+        .course-summary p {
+            margin: 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+        }
+
+        .course-summary strong {
+            display: block;
+            margin-top: 0.45rem;
+            font-size: 1.65rem;
+        }
+
+        .section {
+            padding: 0 1rem 2.5rem;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(2rem, 2.5vw, 3.1rem);
+            line-height: 1.05;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin: 0.85rem auto 0;
+            max-width: 720px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
         }
 
         .test-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(37, 99, 235, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
+            background: white;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 18px 45px rgba(15,23,42,0.08);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .test-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 60px rgba(15,23,42,0.12);
+        }
+
+        .test-card.highlighted {
+            border-color: var(--primary);
+            box-shadow: 0 24px 70px rgba(37,99,235,0.14);
         }
 
         .test-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
+            inset: 0;
+            border-radius: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(20,184,166,0.06));
+        }
+
+        .test-card.highlighted::before {
+            opacity: 1;
+        }
+
+        .test-card-header {
+            padding: 1.6rem 1.6rem 0.9rem;
+        }
+
+        .test-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: white;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
-        .test-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
-            border-color: var(--primary);
+        .test-name {
+            margin: 1rem 0 0.75rem;
+            font-size: 1.35rem;
+            line-height: 1.25;
         }
 
-        .test-set-number {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
+        .test-details {
+            display: grid;
+            gap: 0.8rem;
+            padding: 0 1.6rem 1.4rem;
+            font-size: 0.95rem;
+            color: var(--muted);
         }
 
-        .test-card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 20px;
+        .test-details li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .test-card-meta {
+        .test-footer {
+            padding: 1.25rem 1.6rem 1.6rem;
+            border-top: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-bottom: 12px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
-        .test-card-meta i {
-            color: var(--primary);
-            width: 20px;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-
-        .difficulty-easy {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--success);
-        }
-
-        .difficulty-medium {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--accent);
-        }
-
-        .difficulty-hard {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-        }
-
-        .progress-bar-custom {
-            height: 6px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-        }
-
-        .completion-text {
+        .tag-pill {
             font-size: 0.85rem;
-            color: var(--muted);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .start-test-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 12px;
+            color: var(--primary);
             font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            margin-top: auto;
-            position: relative;
-            overflow: hidden;
         }
 
-        .start-test-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.3s ease;
+        .detail-panel {
+            margin-top: 2rem;
+            padding: 2rem;
+            border-radius: 28px;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: 0 18px 45px rgba(15,23,42,0.06);
         }
 
-        .start-test-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
+        .detail-panel h3 {
+            margin-top: 0;
+            font-size: 1.8rem;
         }
 
-        .start-test-btn:hover::before {
-            left: 100%;
-        }
-
-        /* ==================== FEATURES SECTION ==================== */
-        .features-section {
-            padding: 80px 20px;
-            background: linear-gradient(135deg, var(--light-bg) 0%, rgba(20, 184, 166, 0.05) 100%);
-        }
-
-        .features-grid {
+        .detail-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            animation: fadeIn 0.8s ease-out 0.2s both;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(37, 99, 235, 0.1);
-            border-radius: 20px;
-            padding: 35px;
-            text-align: center;
-            transition: all 0.3s ease;
+        .detail-item {
+            border-radius: 18px;
+            padding: 1.2rem 1.3rem;
+            background: #f8fbff;
+            border: 1px solid rgba(37,99,235,0.08);
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-            border-color: var(--secondary);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .feature-description {
-            font-size: 0.95rem;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* ==================== FOOTER ==================== */
-        .footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 20px 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-section h4 {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .footer-link {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
+        .detail-item strong {
             display: block;
-            transition: all 0.3s ease;
+            font-size: 1.4rem;
+            margin-bottom: 0.45rem;
         }
 
-        .footer-link:hover {
-            color: var(--secondary);
-            transform: translateX(5px);
+        .highlight-stripe {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(37,99,235,0.15), rgba(20,184,166,0.15));
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
+        @media (max-width: 1024px) {
+            .poster-header { padding: 1.75rem 2rem 1rem; }
+            .poster-content { padding: 0 2rem 2rem; }
+            .hero-badges { grid-template-columns: 1fr; }
+            .test-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .detail-grid { grid-template-columns: 1fr; }
         }
 
-        /* ==================== ANIMATIONS ==================== */
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .test-sets-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-            }
-
-            .hero-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .navbar {
-                padding: 15px;
-            }
-
-            .nav-link {
-                padding: 10px 0 !important;
-                margin: 5px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .test-card {
-                padding: 20px;
-            }
-
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* ==================== UTILITY ==================== */
-        .container-custom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        @media (max-width: 720px) {
+            .poster-header { flex-direction: column; text-align: center; padding: 1.5rem 1.5rem 1rem; }
+            .header-text { text-align: center; }
+            .poster-content { flex-direction: column; padding: 0 1.25rem 1.5rem; }
+            .hero-right { min-height: 320px; }
+            .hero-title { font-size: 2.7rem; }
+            .hero-quote-text { font-size: 2rem; }
+            .hero-actions { justify-content: center; }
+            .test-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- ==================== NAVBAR ==================== -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="mocktest.html">
-                <i class="fas fa-book"></i> Bihar Board Mock Test
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="mocktest.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="english-test-series.html">Tests</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="english-dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mocktest.html#results">Results</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mocktest.html" onclick="logout()">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div class="page-shell">
+        <div class="poster-container">
+            <div class="blob-top-right"></div>
+            <div class="blob-bottom-left"></div>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section class="hero-section">
-        <div class="container-custom">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <h1 class="hero-title">English Mock Test Series</h1>
-                        <p class="hero-subtitle">Practice Bihar Board Class 12 English with 15 Full-Length Mock Tests. Each test contains 100 MCQs covering the complete syllabus including Prose, Poetry, Grammar, Writing Skills, and Supplementary Reader.</p>
-                        
-                        <!-- SVG Illustration -->
-                        <svg class="hero-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%; height: auto;">
-                            <!-- Books Stack -->
-                            <g id="books">
-                                <rect x="80" y="120" width="60" height="80" rx="4" fill="#2563EB" opacity="0.8"/>
-                                <rect x="85" y="115" width="60" height="80" rx="4" fill="#14B8A6" opacity="0.6"/>
-                                <rect x="90" y="110" width="60" height="80" rx="4" fill="#F59E0B" opacity="0.4"/>
-                                <circle cx="120" cy="150" r="8" fill="white" opacity="0.3"/>
-                            </g>
-                            
-                            <!-- Student Figure -->
-                            <g id="student">
-                                <circle cx="260" cy="80" r="20" fill="#2563EB" opacity="0.7"/>
-                                <path d="M 240 110 Q 260 100 280 110 L 280 160 Q 260 170 240 160 Z" fill="#14B8A6" opacity="0.7"/>
-                                <path d="M 240 160 L 235 200 L 245 200" stroke="#0F172A" stroke-width="4" opacity="0.6"/>
-                                <path d="M 280 160 L 285 200 L 275 200" stroke="#0F172A" stroke-width="4" opacity="0.6"/>
-                            </g>
-                            
-                            <!-- Floating Badges -->
-                            <g id="badges">
-                                <circle cx="150" cy="70" r="25" fill="#22C55E" opacity="0.2"/>
-                                <text x="150" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#22C55E">100%</text>
-                                
-                                <circle cx="320" cy="200" r="25" fill="#F59E0B" opacity="0.2"/>
-                                <text x="320" y="210" text-anchor="middle" font-size="14" font-weight="bold" fill="#F59E0B">15x</text>
-                            </g>
-                            
-                            <!-- Decorative Elements -->
-                            <path d="M 50 50 Q 100 40 150 50" stroke="#2563EB" stroke-width="2" fill="none" opacity="0.3"/>
-                            <path d="M 300 250 Q 320 240 350 250" stroke="#14B8A6" stroke-width="2" fill="none" opacity="0.3"/>
-                        </svg>
-                    </div>
+            <header class="poster-header">
+                <div class="logo-container">
+                    <img src="Asset/channel logo-2.png" alt="Target English Logo" class="logo-img" />
+                    <img src="Asset/BSEB Logo.jpg" alt="Bihar Board Logo" class="board-logo" />
                 </div>
-                <div class="col-lg-6">
-                    <div class="hero-cards">
-                        <div class="hero-card">
-                            <div class="hero-card-icon"><i class="fas fa-book-open"></i></div>
-                            <div class="hero-card-value">15</div>
-                            <div class="hero-card-label">Test Sets</div>
+                <div class="header-text">
+                    <div class="header-title">PREMIUM MOCK TESTS</div>
+                    <div class="header-subtitle">Bihar Board Class 12 English</div>
+                </div>
+            </header>
+
+            <main class="poster-content">
+                <div class="hero-left">
+                    <span class="hero-tag">English Mock Test Series</span>
+                    <h1 class="hero-title">Bihar Board <span>Class 12</span> English Mock Tests</h1>
+                    <div class="hero-quote">
+                        <p class="hero-quote-text">Practice real exam-level tests and improve your score with clarity, confidence, and premium design.</p>
+                    </div>
+                    <p class="hero-copy">Designed with a clean, premium layout to give students a modern assessment experience. Start with the best mock test structure and stay ahead in board preparation.</p>
+
+                    <div class="hero-badges">
+                        <div class="hero-badge">
+                            <span class="hero-badge-icon">📝</span>
+                            <div class="hero-badge-text">100 Questions</div>
                         </div>
-                        <div class="hero-card">
-                            <div class="hero-card-icon"><i class="fas fa-tasks"></i></div>
-                            <div class="hero-card-value">100</div>
-                            <div class="hero-card-label">Questions/Test</div>
+                        <div class="hero-badge">
+                            <span class="hero-badge-icon">⏱️</span>
+                            <div class="hero-badge-text">60 Minutes</div>
                         </div>
-                        <div class="hero-card">
-                            <div class="hero-card-icon"><i class="fas fa-ban"></i></div>
-                            <div class="hero-card-value">No</div>
-                            <div class="hero-card-label">Negative Marking</div>
-                        </div>
-                        <div class="hero-card">
-                            <div class="hero-card-icon"><i class="fas fa-hourglass-end"></i></div>
-                            <div class="hero-card-value">90m</div>
-                            <div class="hero-card-label">Duration</div>
+                        <div class="hero-badge">
+                            <span class="hero-badge-icon">✔️</span>
+                            <div class="hero-badge-text">No Negative Marking</div>
                         </div>
                     </div>
+
+                    <div class="hero-actions">
+                        <a href="#testSets" class="btn-primary">Start Practice</a>
+                        <a href="#testSets" class="btn-secondary">View Tests</a>
+                        <a href="index.html" class="btn-secondary btn-glow">Back to Home</a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-image-bg"></div>
+                    <div class="offer-card">
+                        <h3>Mock Test Set Selector</h3>
+                        <p>Choose any mock test set and launch the assessment interface instantly. The selected set is highlighted for easy navigation.</p>
+                        <div class="highlight-stripe">Fast | Premium | Exam-ready</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="course-bar">
+            <div class="course-summary">
+                <div>
+                    <p>Course Type</p>
+                    <strong>English Mock Tests</strong>
+                </div>
+                <div>
+                    <p>Duration</p>
+                    <strong>60 Minutes</strong>
+                </div>
+                <div>
+                    <p>Total Tests</p>
+                    <strong>15 Sets</strong>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- ==================== TEST SETS SECTION ==================== -->
-    <section class="test-sets-section">
-        <div class="container-custom">
-            <h2 class="section-title">Available Mock Tests</h2>
-            <div class="test-sets-grid" id="testSetsGrid">
-                <!-- Cards will be generated by JavaScript -->
+        <section id="testSets" class="section">
+            <div class="section-heading">
+                <h2>English Mock Test Sets</h2>
+                <p>Each set contains 100 questions, 100 marks, and a premium exam-style interface with progress, review, and timer support.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- ==================== FEATURES SECTION ==================== -->
-    <section class="features-section">
-        <div class="container-custom">
-            <h2 class="section-title">Premium Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-tasks"></i></div>
-                    <h3 class="feature-title">100 MCQs</h3>
-                    <p class="feature-description">Comprehensive question sets covering all topics and difficulty levels.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shuffle"></i></div>
-                    <h3 class="feature-title">Smart Random Questions</h3>
-                    <p class="feature-description">Questions are randomized to ensure diverse practice in every test.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-save"></i></div>
-                    <h3 class="feature-title">Auto Save</h3>
-                    <p class="feature-description">Your progress is automatically saved as you answer questions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3 class="feature-title">Mobile Friendly</h3>
-                    <p class="feature-description">Practice tests seamlessly on mobile, tablet, and desktop devices.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h3 class="feature-title">Instant Result</h3>
-                    <p class="feature-description">Get immediate feedback with detailed result analysis after completion.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
-                    <h3 class="feature-title">Performance Analysis</h3>
-                    <p class="feature-description">Track your performance with comprehensive analytics and reports.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3 class="feature-title">No Negative Marking</h3>
-                    <p class="feature-description">Attempt all questions without the fear of negative marking.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                    <h3 class="feature-title">Question Palette</h3>
-                    <p class="feature-description">Visual question palette for easy navigation and status tracking.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="test-grid" id="testGrid"></div>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="footer">
-        <div class="container-custom">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4><i class="fas fa-book"></i> About</h4>
-                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;">Bihar Board Class 12 English Mock Test Platform is designed to help students prepare effectively for their board exams with comprehensive practice tests.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="mocktest.html" class="footer-link">Home</a>
-                    <a href="mocktest.html#subjects" class="footer-link">Subjects</a>
-                    <a href="mocktest.html#dashboard" class="footer-link">Dashboard</a>
-                    <a href="mocktest.html#results" class="footer-link">Results</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
-                    <a href="#" class="footer-link">Contact Us</a>
-                    <a href="#" class="footer-link">FAQ</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <div style="display: flex; gap: 15px; margin-top: 15px;">
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#14B8A6'" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#14B8A6'" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#14B8A6'" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.5rem; transition: all 0.3s ease;" onmouseover="this.style.color='#14B8A6'" onmouseout="this.style.color='rgba(255, 255, 255, 0.7)'"><i class="fab fa-youtube"></i></a>
+            <div class="detail-panel" id="selectedTestDetails">
+                <h3>Selected Test Details</h3>
+                <p class="hero-copy">Select a test card above or open this page with a query like <code>?set=1</code> to highlight the chosen mock test.</p>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <strong id="detailSubject">English</strong>
+                        Subject
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailClass">12</strong>
+                        Class
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailBoard">Bihar Board</strong>
+                        Board
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailQuestions">100</strong>
+                        Questions
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailMarks">100</strong>
+                        Marks
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailDuration">60 Minutes</strong>
+                        Duration
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailNegative">No</strong>
+                        Negative Marking
+                    </div>
+                    <div class="detail-item">
+                        <strong id="detailPassing">33%</strong>
+                        Passing Marks
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Bihar Board Mock Test Platform. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #EF4444;"></i> for Students</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        </section>
+    </div>
 
     <script>
-        // Test data for 15 different test sets
         const testSets = [
-            { id: 1, difficulty: 'Easy', completed: 0, total: 100 },
-            { id: 2, difficulty: 'Easy', completed: 0, total: 100 },
-            { id: 3, difficulty: 'Easy', completed: 0, total: 100 },
-            { id: 4, difficulty: 'Easy', completed: 0, total: 100 },
-            { id: 5, difficulty: 'Medium', completed: 0, total: 100 },
-            { id: 6, difficulty: 'Medium', completed: 0, total: 100 },
-            { id: 7, difficulty: 'Medium', completed: 0, total: 100 },
-            { id: 8, difficulty: 'Medium', completed: 0, total: 100 },
-            { id: 9, difficulty: 'Hard', completed: 0, total: 100 },
-            { id: 10, difficulty: 'Hard', completed: 0, total: 100 },
-            { id: 11, difficulty: 'Hard', completed: 0, total: 100 },
-            { id: 12, difficulty: 'Hard', completed: 0, total: 100 },
-            { id: 13, difficulty: 'Mixed', completed: 0, total: 100 },
-            { id: 14, difficulty: 'Mixed', completed: 0, total: 100 },
-            { id: 15, difficulty: 'Mixed', completed: 0, total: 100 }
+            { id: 1, name: 'English Mock Test 01', difficulty: 'Easy', progress: '0/100', highlight: 'Set 01' },
+            { id: 2, name: 'English Mock Test 02', difficulty: 'Easy', progress: '0/100', highlight: 'Set 02' },
+            { id: 3, name: 'English Mock Test 03', difficulty: 'Easy', progress: '0/100', highlight: 'Set 03' },
+            { id: 4, name: 'English Mock Test 04', difficulty: 'Medium', progress: '0/100', highlight: 'Set 04' },
+            { id: 5, name: 'English Mock Test 05', difficulty: 'Medium', progress: '0/100', highlight: 'Set 05' },
+            { id: 6, name: 'English Mock Test 06', difficulty: 'Medium', progress: '0/100', highlight: 'Set 06' },
+            { id: 7, name: 'English Mock Test 07', difficulty: 'Medium', progress: '0/100', highlight: 'Set 07' },
+            { id: 8, name: 'English Mock Test 08', difficulty: 'Hard', progress: '0/100', highlight: 'Set 08' },
+            { id: 9, name: 'English Mock Test 09', difficulty: 'Hard', progress: '0/100', highlight: 'Set 09' },
+            { id: 10, name: 'English Mock Test 10', difficulty: 'Hard', progress: '0/100', highlight: 'Set 10' },
+            { id: 11, name: 'English Mock Test 11', difficulty: 'Hard', progress: '0/100', highlight: 'Set 11' },
+            { id: 12, name: 'English Mock Test 12', difficulty: 'Hard', progress: '0/100', highlight: 'Set 12' },
+            { id: 13, name: 'English Mock Test 13', difficulty: 'Hard', progress: '0/100', highlight: 'Set 13' },
+            { id: 14, name: 'English Mock Test 14', difficulty: 'Hard', progress: '0/100', highlight: 'Set 14' },
+            { id: 15, name: 'English Mock Test 15', difficulty: 'Hard', progress: '0/100', highlight: 'Set 15' }
         ];
 
-        // Difficulty badge styling
-        function getDifficultyBadgeClass(difficulty) {
-            switch(difficulty) {
-                case 'Easy': return 'difficulty-easy';
-                case 'Medium': return 'difficulty-medium';
-                case 'Hard': return 'difficulty-danger';
-                default: return 'difficulty-medium';
-            }
+        const testGrid = document.getElementById('testGrid');
+        const selectedTestDetails = document.getElementById('selectedTestDetails');
+
+        function getQuerySet() {
+            const params = new URLSearchParams(window.location.search);
+            const setValue = parseInt(params.get('set'), 10);
+            return Number.isInteger(setValue) && setValue >= 1 && setValue <= testSets.length ? setValue : 1;
         }
 
-        // Generate test cards
-        function generateTestCards() {
-            const grid = document.getElementById('testSetsGrid');
-            grid.innerHTML = '';
-
+        function renderTests(selectedId) {
+            testGrid.innerHTML = '';
             testSets.forEach(test => {
-                const progressPercentage = (test.completed / test.total) * 100;
-                const setNumber = String(test.id).padStart(2, '0');
-
-                const card = document.createElement('div');
-                card.className = 'test-card';
+                const card = document.createElement('article');
+                card.className = 'test-card' + (test.id === selectedId ? ' highlighted' : '');
                 card.innerHTML = `
-                    <div class="test-set-number">Set ${setNumber}</div>
-                    <div class="test-card-title">English Mock Test ${test.id}</div>
-                    
-                    <div class="test-card-meta">
-                        <i class="fas fa-tasks"></i>
-                        <span>100 Questions</span>
+                    <div class="test-card-header">
+                        <span class="test-badge">${test.highlight}</span>
+                        <h3 class="test-name">${test.name}</h3>
                     </div>
-                    
-                    <div class="test-card-meta">
-                        <i class="fas fa-hourglass-end"></i>
-                        <span>90 Minutes</span>
+                    <ul class="test-details">
+                        <li><span>Questions</span><strong>100</strong></li>
+                        <li><span>Marks</span><strong>100</strong></li>
+                        <li><span>Duration</span><strong>60 min</strong></li>
+                        <li><span>Negative</span><strong>No</strong></li>
+                        <li><span>Difficulty</span><strong>${test.difficulty}</strong></li>
+                    </ul>
+                    <div class="test-footer">
+                        <span class="tag-pill">${test.progress} Progress</span>
+                        <a href="english-mock-test.html?set=${test.id}" class="btn btn-primary">Start Test</a>
                     </div>
-                    
-                    <div class="test-card-meta">
-                        <i class="fas fa-ban"></i>
-                        <span>No Negative Marking</span>
-                    </div>
-                    
-                    <span class="difficulty-badge ${getDifficultyBadgeClass(test.difficulty)}">
-                        <i class="fas fa-chart-line"></i> ${test.difficulty}
-                    </span>
-                    
-                    <div class="completion-text">
-                        Progress: <strong>${test.completed}/${test.total}</strong>
-                    </div>
-                    
-                    <div class="progress-bar-custom">
-                        <div class="progress-fill" style="width: ${progressPercentage}%"></div>
-                    </div>
-                    
-                    <button class="start-test-btn" onclick="startTest(${test.id})">
-                        <i class="fas fa-play-circle"></i> Start Test
-                    </button>
                 `;
-
-                grid.appendChild(card);
-            });
-        }
-
-        // Start test function
-        function startTest(setId) {
-            // Store selected test in localStorage
-            localStorage.setItem('selectedTestSet', setId);
-            
-            // Navigate to test page (you can create english-mock-test.html)
-            window.location.href = `english-mock-test.html?set=${setId}`;
-        }
-
-        // Logout function
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('bseb-student-name');
-                localStorage.removeItem('bseb-student-username');
-                localStorage.removeItem('bseb-student-password');
-                window.location.href = 'mocktest.html';
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            generateTestCards();
-            
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
+                card.addEventListener('click', () => {
+                    window.location.href = `english-mock-test.html?set=${test.id}`;
                 });
+                testGrid.appendChild(card);
             });
-        });
+        }
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        function renderSelectedDetails(selectedId) {
+            const selected = testSets.find(test => test.id === selectedId) || testSets[0];
+            document.getElementById('detailSubject').textContent = selected.name.includes('English') ? 'English' : 'English';
+            document.getElementById('detailClass').textContent = '12';
+            document.getElementById('detailBoard').textContent = 'Bihar Board';
+            document.getElementById('detailQuestions').textContent = '100';
+            document.getElementById('detailMarks').textContent = '100';
+            document.getElementById('detailDuration').textContent = '60 Minutes';
+            document.getElementById('detailNegative').textContent = 'No';
+            document.getElementById('detailPassing').textContent = '33%';
+            selectedTestDetails.querySelector('p').textContent = `Selected mock test: ${selected.name}. Open or refresh with ?set=${selected.id} to keep this card highlighted.`;
+        }
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.test-card, .feature-card').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
+        const selectedSet = getQuerySet();
+        renderTests(selectedSet);
+        renderSelectedDetails(selectedSet);
     </script>
 </body>
 </html>

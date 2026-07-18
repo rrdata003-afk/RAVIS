@@ -46,9 +46,45 @@
       }
       .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; }
       .brand-badge { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: grid; place-items: center; color: white; font-size: 1.2rem; }
-      .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-      .nav-links button, .nav-links a { border: none; background: transparent; padding: 10px 14px; border-radius: 999px; color: var(--muted); cursor: pointer; font-weight: 600; }
-      .nav-links button.active, .nav-links button:hover, .nav-links a:hover { background: rgba(37, 99, 235, 0.08); color: var(--primary); }
+      .nav-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+      .nav-links button, .nav-links a { border: 1px solid transparent; background: rgba(255,255,255,0.96); padding: 10px 16px; border-radius: 999px; color: var(--dark); cursor: pointer; font-weight: 600; box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06); transition: background 0.25s ease, transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; }
+      .nav-links button.active, .nav-links button:hover, .nav-links a:hover { background: rgba(59, 130, 246, 0.16); color: var(--primary); transform: translateY(-1px); box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.15); }
+      .nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        border: none;
+        background: rgba(255,255,255,0.92);
+        cursor: pointer;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      }
+      .nav-toggle:hover { transform: translateY(-1px); box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12); }
+      .nav-toggle span {
+        display: block;
+        width: 26px;
+        height: 4px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #4f46e5, #ec4899);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.28);
+        transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+      }
+      .nav-toggle span + span { margin-top: 8px; }
+      .topbar.nav-open .nav-toggle span {
+        background: linear-gradient(90deg, #ec4899, #f59e0b);
+      }
+      .topbar.nav-open .nav-toggle span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .topbar.nav-open .nav-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+      .topbar.nav-open .nav-toggle span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
       .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 16px; border-radius: 999px; border: none; cursor: pointer; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease; }
       .btn:hover { transform: translateY(-2px); }
       .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 14px 30px rgba(37, 99, 235, 0.18); }
@@ -58,14 +94,14 @@
       .view.active { display: block; }
       .page-shell { display: none; }
       .hero-card, .panel, .card, .metric-card, .subject-card, .question-card, .result-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06); }
-      .hero-card { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; padding: 28px; overflow: hidden; position: relative; }
+      .hero-card { display: grid; grid-template-columns: 0.95fr 1.3fr; gap: 30px; padding: 32px; overflow: hidden; position: relative; align-items: center; }
       .hero-card::before { content: ""; position: absolute; inset: auto -50px -50px auto; width: 280px; height: 280px; background: radial-gradient(circle, rgba(20, 184, 166, 0.2), transparent 68%); }
       .eyebrow { text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.77rem; font-weight: 800; color: var(--primary); margin: 0 0 10px; }
       .hero-title { font-size: clamp(2rem, 3vw, 3rem); line-height: 1.1; margin: 0 0 12px; }
       .hero-copy { color: var(--muted); max-width: 700px; line-height: 1.8; margin-bottom: 18px; }
       .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-      .hero-visual { background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(20, 184, 166, 0.12)); border-radius: 20px; padding: 20px; display: grid; place-items: center; }
-      .hero-visual svg { width: min(100%, 320px); }
+      .hero-visual { background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(20, 184, 166, 0.14)); border-radius: 26px; padding: 36px; display: grid; place-items: center; min-height: 640px; }
+      .hero-visual img, .hero-visual svg { width: min(100%, 760px); max-width: 860px; border-radius: 28px; }
       .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 18px; }
       .metric-card { padding: 18px 20px; }
       .metric-card strong { display: block; font-size: 1.55rem; margin-bottom: 6px; }
@@ -113,7 +149,45 @@
         .hero-card, .dashboard-grid, .question-layout { grid-template-columns: 1fr; }
       }
       @media (max-width: 640px) {
-        .topbar { flex-direction: column; align-items: flex-start; }
+        .topbar {
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 14px;
+        }
+        .brand {
+          width: auto;
+          order: 1;
+          flex: 1;
+        }
+        .nav-toggle {
+          display: flex;
+          order: 2;
+        }
+        .nav-links {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          gap: 10px;
+          order: 3;
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          padding: 0;
+          transform: translateY(-12px);
+          transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease, transform 0.35s ease;
+        }
+        .nav-links button,
+        .nav-links a {
+          width: 100%;
+          justify-content: center;
+          padding: 14px 16px;
+        }
+        .topbar.nav-open .nav-links {
+          max-height: 520px;
+          opacity: 1;
+          padding: 12px 0 10px;
+          transform: translateY(0);
+        }
         .form-row { grid-template-columns: 1fr; }
         .app-shell { padding: 14px 12px 32px; }
       }
@@ -122,13 +196,18 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <div class="brand">
+        <a href="index.html#top" class="brand" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px;">
           <img src="Asset/channel logo-2.png" alt="Ravi Sir Target English Classes" style="width: 48px; height: 48px; border-radius: 12px; object-fit: cover;" />
           <div>
             <div style="font-weight: 700; font-size: 1rem;">Target English</div>
             <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">Mock Test Platform</div>
           </div>
-        </div>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav class="nav-links">
           <button class="active" data-view="home">Home</button>
           <button data-view="dashboard">Dashboard</button>
@@ -155,16 +234,7 @@
             </div>
           </div>
           <div class="hero-visual">
-            <svg viewBox="0 0 400 320" role="img" aria-label="Illustration of student success">
-              <rect x="48" y="30" width="304" height="260" rx="28" fill="#ffffff" />
-              <circle cx="130" cy="115" r="44" fill="#2563eb" opacity="0.14" />
-              <circle cx="270" cy="115" r="44" fill="#14b8a6" opacity="0.16" />
-              <rect x="88" y="92" width="224" height="136" rx="18" fill="#f8fafc" />
-              <rect x="114" y="126" width="92" height="10" rx="5" fill="#2563eb" />
-              <rect x="114" y="146" width="142" height="10" rx="5" fill="#14b8a6" />
-              <rect x="114" y="166" width="122" height="10" rx="5" fill="#f59e0b" />
-              <path d="M146 240c26-34 84-34 110 0" stroke="#2563eb" stroke-width="10" stroke-linecap="round" fill="none" />
-            </svg>
+            <img src="Asset/MOCK_TEST_POSTER.jpg" alt="Mock Test Poster" />
           </div>
         </div>
 
@@ -354,75 +424,6 @@
 
     <div id="toast" class="toast"></div>
 
-    <script src="mocktest.js"></script>
-  </body>
-</html>
-
-    </style>
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="topbar">
-        <div class="brand-bar">
-          <img src="Asset/channel logo-2.png" alt="Ravi Sir logo" />
-          <div class="brand-copy">
-            <p class="brand-title">BSEB English Mock Test</p>
-            <p class="brand-subtitle">Practice online mock tests and live exam-style questions prepared for Bihar Board Class 12 students.</p>
-          </div>
-        </div>
-        <a href="index.html" class="btn btn-secondary">Back to Home</a>
-      </header>
-
-      <section class="card">
-        <div class="hero-heading">Live Mock Test Practice</div>
-        <p class="hero-copy">Use the dedicated BSEB mock test engine to practice objective questions, track your progress, and see instant results.</p>
-
-        <div class="stats-grid">
-          <div class="stat-card">
-            <strong>100+</strong>
-            <span>Objective Questions</span>
-          </div>
-          <div class="stat-card">
-            <strong>60 min</strong>
-            <span>Standard Test Time</span>
-          </div>
-          <div class="stat-card">
-            <strong>No</strong>
-            <span>Negative Marking</span>
-          </div>
-          <div class="stat-card">
-            <strong>Instant</strong>
-            <span>Score Report</span>
-          </div>
-        </div>
-
-        <div class="question-panel">
-          <div class="section-title">
-            <div>
-              <h2>Question Panel</h2>
-              <p style="margin: 0.45rem 0 0; color: #94a3b8;">Answer the question below and submit when you are ready.</p>
-            </div>
-            <div style="text-align: right; min-width: 140px;">
-              <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.14em; color: #94a3b8; font-weight: 700;">Time left</div>
-              <div id="timer" style="font-size: 1.65rem; font-weight: 800; margin-top: 6px; color: #ffffff;">00:00:00</div>
-            </div>
-          </div>
-
-          <div class="progress-wrap"><div id="prog" class="progress-fill"></div></div>
-          <div id="test-info" style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 18px;">Loading test details…</div>
-          <div id="questionArea"></div>
-          <div id="controlsArea" class="controls">
-            <button id="prevBtn" class="btn btn-secondary">Previous</button>
-            <button id="nextBtn" class="btn btn-secondary">Next</button>
-            <button id="submitBtn" class="btn btn-primary">Submit Test</button>
-          </div>
-        </div>
-
-        <div id="resultArea"></div>
-      </section>
-    </div>
-
-    <script src="bseb_questions.js"></script>
     <script src="mocktest.js"></script>
   </body>
 </html>

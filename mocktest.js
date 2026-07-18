@@ -91,6 +91,12 @@ function showView(viewName) {
   document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === viewName));
   document.querySelectorAll(".nav-links button[data-view]").forEach((btn) => btn.classList.toggle("active", btn.dataset.view === viewName));
   state.activeView = viewName;
+  const topbar = document.querySelector('.topbar');
+  const navToggle = document.querySelector('.nav-toggle');
+  if (topbar?.classList.contains('nav-open')) {
+    topbar.classList.remove('nav-open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+  }
   if (viewName === "dashboard") renderDashboard();
   if (viewName === "home") renderSubjects();
 }
@@ -408,6 +414,14 @@ function init() {
   document.getElementById("startHeroBtn").addEventListener("click", () => startTest("English"));
   document.getElementById("authBtn").addEventListener("click", openAuthModal);
   document.getElementById("closeModalBtn").addEventListener("click", closeAuthModal);
+  const navToggle = document.querySelector('.nav-toggle');
+  const topbar = document.querySelector('.topbar');
+  if (navToggle && topbar) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = topbar.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
   authModal.addEventListener("click", (event) => { if (event.target === authModal) closeAuthModal(); });
   document.getElementById("switchToRegister").addEventListener("click", (event) => { event.preventDefault(); switchAuthMode("register"); });
   document.getElementById("switchToLogin").addEventListener("click", (event) => { event.preventDefault(); switchAuthMode("login"); });
