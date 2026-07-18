@@ -41,17 +41,20 @@
       .hero-title span { background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
       .hero-copy { margin: 0; max-width: 620px; line-height: 1.85; color: var(--muted); font-size: 1rem; }
       .hero-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
-      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
-      .btn-primary { background: linear-gradient(90deg, var(--primary), var(--accent)); color: white; padding: 14px 24px; box-shadow: 0 16px 32px rgba(46, 107, 255, 0.24); }
-      .btn-secondary { background: white; color: var(--primary); padding: 14px 24px; border: 1px solid rgba(46, 107, 255, 0.16); }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; }
+      .btn-primary { background: linear-gradient(90deg, var(--primary), var(--accent)) !important; color: white !important; padding: 14px 24px; box-shadow: 0 16px 32px rgba(46, 107, 255, 0.28) !important; }
+      .btn-secondary { background: linear-gradient(90deg, rgba(255,79,163,1), rgba(46,107,255,1)) !important; color: white !important; padding: 14px 24px; border: 1px solid transparent; box-shadow: 0 18px 40px rgba(46, 107, 255, 0.18) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+      .btn-secondary:hover { background: linear-gradient(90deg, rgba(46,107,255,1), rgba(255,79,163,1)) !important; }
       .btn:hover { transform: translateY(-2px); }
+      .hero-actions .btn-secondary { opacity: 1 !important; }
       .hero-stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
       .stat-card { padding: 18px 20px; border-radius: 22px; background: #f7f9ff; border: 1px solid rgba(46,107,255,0.1); }
       .stat-card strong { display: block; font-size: 1.8rem; margin-bottom: 6px; color: var(--primary); }
       .stat-card span { color: var(--muted); font-size: 0.95rem; }
 
-      .hero-graphic { position: relative; min-height: 520px; border-radius: 28px; background: radial-gradient(circle at top right, rgba(46, 107, 255, 0.16), transparent 45%), radial-gradient(circle at bottom left, rgba(255, 79, 163, 0.16), transparent 40%); display: grid; place-items: center; }
-      .hero-graphic-card { width: min(100%, 420px); padding: 28px; background: rgba(255,255,255,0.84); border-radius: 28px; box-shadow: 0 18px 45px rgba(15,23,42,0.08); backdrop-filter: blur(8px); }
+      .hero-graphic { position: relative; min-height: 520px; border-radius: 28px; background: radial-gradient(circle at top right, rgba(46, 107, 255, 0.16), transparent 45%), radial-gradient(circle at bottom left, rgba(255, 79, 163, 0.16), transparent 40%); display: grid; place-items: center; padding: 24px; }
+      .hero-poster { width: 100%; height: auto; max-width: 740px; border-radius: 28px; object-fit: cover; box-shadow: 0 24px 80px rgba(15, 23, 42, 0.15); }
+      .hero-graphic-card { width: min(100%, 420px); padding: 28px; background: rgba(255,255,255,0.92); border-radius: 28px; box-shadow: 0 18px 45px rgba(15,23,42,0.08); backdrop-filter: blur(8px); position: absolute; bottom: 24px; right: 24px; }
       .hero-graphic-title { font-size: 1.3rem; margin: 0 0 14px; color: #142033; }
       .hero-graphic-text { color: var(--muted); line-height: 1.8; }
 
@@ -108,13 +111,36 @@
 
       @media (max-width: 980px) {
         .hero-card { grid-template-columns: 1fr; }
+        .hero-graphic { min-height: auto; padding: 18px; }
+        .hero-poster { max-width: 100%; }
+        .hero-graphic-card { position: relative; bottom: auto; right: auto; width: 100%; margin-top: 22px; }
+        .tracker-panel { grid-template-columns: 1fr; }
+        .feature-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 980px) {
+        .hero-card { grid-template-columns: 1fr; }
+        .hero-graphic { min-height: auto; padding: 18px; }
+        .hero-poster { max-width: 100%; }
+        .hero-graphic-card { position: relative; bottom: auto; right: auto; width: 100%; margin-top: 22px; }
+        .hero-stat-grid { grid-template-columns: 1fr; }
+        .hero-stat-grid .stat-card { width: 100%; }
         .tracker-panel { grid-template-columns: 1fr; }
         .feature-grid { grid-template-columns: 1fr; }
       }
 
       @media (max-width: 680px) {
         .page-shell { padding: 20px 16px 32px; }
-        .hero-title { font-size: 2.6rem; }
+        .hero-card { padding: 24px; gap: 20px; }
+        .hero-title { font-size: 2.4rem; }
+        .hero-copy { font-size: 0.98rem; max-width: 100%; }
+        .hero-actions { flex-direction: column; align-items: stretch; }
+        .hero-actions .btn { width: 100%; }
+        .hero-stat-grid { grid-template-columns: 1fr; gap: 14px; }
+        .hero-stat-grid .stat-card { padding: 16px 18px; }
+        .hero-poster { max-width: 100%; border-radius: 24px; }
+        .hero-graphic-card { padding: 22px; margin-top: 18px; }
+        .tracker-panel { gap: 18px; }
       }
     </style>
   </head>
@@ -160,6 +186,7 @@
           <p class="hero-copy">A structured batch designed for Bihar Board students with chapter-based lessons, practice trackers, audio support, and downloadable revision notes.</p>
           <div class="hero-actions">
             <a href="#batches" class="btn btn-primary">Join Class 11 Batch</a>
+            <a href="class11-Video.html" class="btn btn-secondary">Watch Video Lessons</a>
             <a href="#feature" class="btn btn-secondary">Download PDF</a>
           </div>
 
@@ -180,11 +207,12 @@
         </div>
 
         <div class="hero-graphic">
-          <div class="hero-graphic-card">
-            <div class="hero-graphic-title">Rainbow Part-1 Tracker</div>
-            <p class="hero-graphic-text">Track chapter progress, video production status, and PDF note readiness for every lesson in the Class 11 syllabus.</p>
-          </div>
-        </div>
+          <img
+            src="Asset/CLASS_11th _NIRMAN_BATCH_poster.png"
+            alt="Class 11th Nirman Batch poster"
+            class="hero-poster"
+          />
+         
       </section>
 
       <section class="section section-grid" id="videos">
@@ -193,20 +221,7 @@
           <h2>Watch short lessons made for Class 11 success.</h2>
           <p>Every topic includes clear explanation videos and chapter examples to build confidence.</p>
         </div>
-        <div class="material-list">
-          <article class="card">
-            <h3>Grammar Video Series</h3>
-            <p>Step-by-step explanation videos for tense, sentence structure, and board-style grammar.</p>
-          </article>
-          <article class="card">
-            <h3>Chapter Walkthroughs</h3>
-            <p>Learn prose and poetry chapters with guided reading, summaries, and exam-focused examples.</p>
-          </article>
-          <article class="card">
-            <h3>Audio Support</h3>
-            <p>Listen to lesson highlights and rapid revision summaries for faster recall.</p>
-          </article>
-        </div>
+      
       </section>
 
       <section class="tracker-panel" id="batches">
@@ -297,25 +312,7 @@
         </div>
       </section>
 
-      <section class="feature-section" id="audio">
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🔊</div>
-            <h3>Audio Lessons</h3>
-            <p>Short chapter audio and revision clips keep learning easy when you study on the go.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📚</div>
-            <h3>Downloadable Notes</h3>
-            <p>Save PDF notes for every topic so you can revise quickly before exams and tests.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Live Practice</h3>
-            <p>Practice all concepts with helpful tips, quick tests, and board-focused exercises.</p>
-          </div>
-        </div>
-      </section>
+   
 
       <section class="feature-section" id="feature">
         <div class="feature-grid">
@@ -337,13 +334,7 @@
         </div>
       </section>
 
-      <section class="section chat-section" id="chat">
-        <div class="card" style="padding: 2rem; border-radius: 28px; box-shadow: 0 18px 40px rgba(46,107,255,0.12); background: rgba(255,255,255,0.95); margin-top: 32px;">
-          <h2>AI Chat Support</h2>
-          <p>Need help choosing the right Class 11 content? Click below to login and chat with our assistant for instant guidance.</p>
-          <a href="login.html" class="btn btn-primary">Open AI Chat</a>
-        </div>
-      </section>
+   
 
       <footer class="page-footer">
         <p>This Class 11 batch page is built for Bihar Board students, using a fresh design system, new content, and the requested brand colors.</p>
