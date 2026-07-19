@@ -53,6 +53,78 @@
             transition: opacity 0.3s ease;
 
         }
+        .premium-nav-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+            .premium-nav-grid {
+                grid-template-columns: 1.4fr 1fr 1fr;
+            }
+        }
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            border-radius: 9999px;
+            padding: 0.85rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 12px rgba(59,130,246,0.35);
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(59,130,246,0.6), 0 0 40px rgba(59,130,246,0.35);
+        }
+        .nav-button:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 24px rgba(59,130,246,0.65);
+        }
+        .nav-button:focus-visible {
+            outline: 3px solid rgba(59,130,246,0.45);
+            outline-offset: 2px;
+        }
+        .nav-button-back {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: white;
+            border: 1px solid rgba(56,189,248,0.35);
+            box-shadow: 0 0 14px rgba(56,189,248,0.35);
+        }
+        .nav-button-secondary {
+            background: rgba(255,255,255,0.16);
+            color: #0f172a;
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(56,189,248,0.35);
+        }
+        .nav-button-primary {
+            background: linear-gradient(90deg, #22d3ee, #0ea5e9);
+            color: white;
+            border: 1px solid rgba(59,130,246,0.45);
+            box-shadow: 0 0 16px rgba(59,130,246,0.35);
+        }
+        .nav-button-primary:hover {
+            box-shadow: 0 0 25px rgba(59,130,246,0.7), 0 0 48px rgba(59,130,246,0.35);
+        }
+        .nav-button.disabled,
+        .nav-button[disabled] {
+            opacity: 0.45;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        .nav-icon {
+            display: inline-flex;
+            transition: transform 0.3s ease;
+        }
+        .nav-button:hover .nav-icon:first-child {
+            transform: translateX(-2px);
+        }
+        .nav-button:hover .nav-icon:last-child {
+            transform: translateX(2px);
+        }
 
     </style>
 
@@ -472,6 +544,24 @@
 
                     </div>
 
+                    <div id="lesson-detail" class="hidden mt-6"></div>
+                    <div id="lesson-navigation" class="hidden rounded-3xl border border-slate-200 bg-slate-50/80 p-4 shadow-sm mt-4">
+                        <div class="premium-nav-grid">
+                            <a id="back-folder-button" href="class11.html#poetry" class="nav-button nav-button-back w-full text-center md:text-left" aria-label="Back to Class 11 section">
+                                <span class="nav-icon">←</span>
+                                <span id="back-folder-label">Back to Class 11</span>
+                            </a>
+                            <button id="previous-lesson-button" type="button" onclick="navigateLesson(-1)" class="nav-button nav-button-secondary w-full" aria-label="Previous lesson">
+                                <span class="nav-icon">←</span>
+                                <span>Previous Lesson</span>
+                            </button>
+                            <button id="next-lesson-button" type="button" onclick="navigateLesson(1)" class="nav-button nav-button-primary w-full" aria-label="Next lesson">
+                                <span>Next Lesson</span>
+                                <span class="nav-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -483,6 +573,17 @@
 
 
     <script>
+
+        const folderShortLabels = {
+            prose: 'Prose',
+            poetry: 'Poetry',
+            grammar: 'Grammar',
+            vocabulary: 'Vocabulary'
+        };
+
+        let currentFolder = null;
+        let currentLessons = [];
+        let currentLessonIndex = -1;
 
         function switchTab(tabName) {
 
@@ -540,13 +641,18 @@
 
         function openFolder(folderId) {
 
+            currentFolder = folderId;
+            currentLessonIndex = -1;
+            currentLessons = [];
+
             const listView = document.getElementById('folder-list-view');
 
             const innerView = document.getElementById('inner-folder-view');
 
             const title = document.getElementById('inner-folder-title');
 
-
+            const lessonNavigation = document.getElementById('lesson-navigation');
+            lessonNavigation.classList.remove('hidden');
 
             if (folderId === 'prose') {
 
@@ -630,6 +736,7 @@
 
             innerView.classList.remove('hidden');
 
+            renderLessonNavigation();
         }
 
 
@@ -640,11 +747,11 @@
 
             if (!container) return;
 
-
+            currentLessons = lessons;
 
             container.innerHTML = lessons.map((lesson, index) => `
 
-                <div class="p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors cursor-pointer group">
+                <div class="lesson-item p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors cursor-pointer group" onclick="openLesson(${index})">
 
                     <div class="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-50 text-cyan-700 font-bold text-sm">
 
@@ -660,7 +767,7 @@
 
                     </div>
 
-                    <span class="text-[11px] text-slate-500 font-semibold">Watch</span>
+                    <button type="button" onclick="openLesson(${index}); event.stopPropagation();" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-cyan-600 hover:bg-cyan-50 transition">Open</button>
 
                 </div>
 
@@ -670,12 +777,139 @@
 
 
 
+        function openLesson(index) {
+            if (index < 0 || index >= currentLessons.length) return;
+            currentLessonIndex = index;
+            const lessonItems = document.querySelectorAll('#inner-folder-items .lesson-item');
+            lessonItems.forEach((item, itemIndex) => {
+                item.classList.toggle('bg-cyan-50/40', itemIndex === index);
+                item.classList.toggle('border', itemIndex === index);
+                item.classList.toggle('border-cyan-200', itemIndex === index);
+            });
+            renderLessonNavigation();
+            renderLessonDetail(currentLessons[index]);
+            const selected = lessonItems[index];
+            if (selected) selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function renderLessonDetail(lesson) {
+            const detail = document.getElementById('lesson-detail');
+            if (!detail) return;
+            detail.classList.remove('hidden');
+            detail.innerHTML = buildLessonDetail(lesson);
+        }
+
+        function buildLessonDetail(lesson) {
+            const sectionLabel = folderShortLabels[currentFolder] || 'Class 11';
+            return `
+                <div class="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm space-y-6">
+                    <div class="space-y-3">
+                        <div class="text-sm text-gray-500">Class 11 • ${sectionLabel}</div>
+                        <h2 class="text-2xl font-semibold text-gray-900">${lesson.title}</h2>
+                        <p class="text-sm text-gray-500">Duration: ${lesson.duration}</p>
+                    </div>
+                    ${buildLessonSummary(lesson)}
+                    ${buildResourceCard('🎥', 'Watch Video', 'Open the lesson video if available.', 'video', 'Checking availability…', false)}
+                    ${buildResourceCard('📖', 'Lecture Notes', 'Read the lesson notes rendered from markdown.', 'notes', 'Checking availability…', false)}
+                    ${buildResourceCard('📄', 'Book PDF', 'Preview and download the lesson PDF.', 'pdf', 'Checking availability…', false)}
+                    ${buildResourceCard('📝', 'One Page Revision', 'Open a quick revision sheet for the lesson.', 'revision', 'Checking availability…', false)}
+                    ${buildResourceCard('📚', 'Word Meanings', 'Search lesson vocabulary and meanings.', 'vocabulary', 'Checking availability…', false)}
+                    ${buildResourceCard('❓', 'Important Questions', 'Practice important lesson questions.', 'questions', 'Checking availability…', false)}
+                </div>
+            `;
+        }
+
+        function buildResourceCard(icon, title, description, key, status, available) {
+            const actionLabel = {
+                video: 'Watch Now',
+                notes: 'Read Notes',
+                pdf: 'Preview PDF',
+                revision: 'Open Revision',
+                vocabulary: 'Learn Words',
+                questions: 'Practice Now'
+            }[key] || 'Open';
+            return `
+                <div id="resource-${key}" class="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 text-2xl">${icon}</div>
+                            <div>
+                                <div class="flex flex-wrap gap-2 items-center mb-2">
+                                    <h3 class="text-base font-semibold text-gray-900">${title}</h3>
+                                    <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500">${status}</span>
+                                </div>
+                                <p class="text-sm text-gray-500">${description}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <button type="button" onclick="handleResourceAction('${key}')" class="resource-button rounded-full border border-cyan-600 bg-cyan-50 px-4 py-2 text-sm font-semibold text-cyan-600 hover:bg-cyan-100 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500" ${available ? '' : 'disabled'}>${actionLabel}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleResourceAction(key) {
+            alert('This feature will open soon for this lesson.');
+        }
+
+        function buildLessonSummary(lesson) {
+            const summary = lesson.summary || 'Open this lesson to view the chapter summary, lecture notes preview, and quick revision highlights.';
+            return `
+                <div class="rounded-3xl border border-gray-100 bg-slate-50 p-5 shadow-sm">
+                    <div class="mb-4">
+                        <h3 class="text-base font-semibold text-gray-900">Lecture Notes Preview</h3>
+                        <p class="text-sm text-slate-600">Rendered from chapter summary source.</p>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-7">${summary}</p>
+                </div>
+            `;
+        }
+
+        function navigateLesson(direction) {
+            if (currentLessonIndex === -1) return;
+            const nextIndex = currentLessonIndex + direction;
+            if (nextIndex >= 0 && nextIndex < currentLessons.length) {
+                openLesson(nextIndex);
+            }
+        }
+
+        function renderLessonNavigation() {
+            const backButton = document.getElementById('back-folder-button');
+            const backLabel = document.getElementById('back-folder-label');
+            const previousButton = document.getElementById('previous-lesson-button');
+            const nextButton = document.getElementById('next-lesson-button');
+            const folderLabel = folderShortLabels[currentFolder] || 'Class 11';
+            if (backButton) {
+                backButton.href = `class11.html#${currentFolder || 'poetry'}`;
+            }
+            if (backLabel) {
+                backLabel.textContent = `Back to ${folderLabel}`;
+            }
+            const isFirst = currentLessonIndex <= 0;
+            const isLast = currentLessonIndex === -1 || currentLessonIndex >= currentLessons.length - 1;
+            if (previousButton) {
+                previousButton.disabled = currentLessonIndex === -1 || isFirst;
+                previousButton.classList.toggle('disabled', currentLessonIndex === -1 || isFirst);
+            }
+            if (nextButton) {
+                nextButton.disabled = currentLessonIndex === -1 || isLast;
+                nextButton.classList.toggle('disabled', currentLessonIndex === -1 || isLast);
+            }
+            if (currentLessonIndex !== -1 && currentLessons[currentLessonIndex]) {
+                if (previousButton) previousButton.setAttribute('aria-label', `Previous lesson from ${currentLessons[currentLessonIndex].title}`);
+                if (nextButton) nextButton.setAttribute('aria-label', `Next lesson from ${currentLessons[currentLessonIndex].title}`);
+            }
+        }
+
         function closeFolder() {
 
             const listView = document.getElementById('folder-list-view');
 
             const innerView = document.getElementById('inner-folder-view');
 
+            const lessonNavigation = document.getElementById('lesson-navigation');
+            if (lessonNavigation) lessonNavigation.classList.add('hidden');
             innerView.classList.add('hidden');
 
             listView.classList.remove('hidden');

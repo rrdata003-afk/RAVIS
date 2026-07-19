@@ -475,6 +475,36 @@ main {
   .typed-text, .typed-cursor {
     font-size: 1.35rem; /* readable on mobile */
   }
+
+  .audio-card {
+    padding: 1rem;
+  }
+
+  .audio-player {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .audio-waveform {
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.35rem;
+    background: rgba(37, 99, 235, 0.06);
+    border-radius: 1rem;
+  }
+
+  .audio-thumb {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 0.9rem 1rem;
+  }
 }
 
 .hero-tagline {
@@ -755,6 +785,18 @@ main {
   border: 1px solid rgba(20,33,61,0.06);
 }
 
+/* Small audio thumbnail used in the audio player */
+.audio-thumb {
+  width: min(340px, 100%);
+  max-width: 100%;
+  flex: 0 0 auto;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
 .hero-card {
   padding: 1rem;
   background: linear-gradient(145deg, #ffffff, #fef3e7);
@@ -927,9 +969,17 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.7rem;
+  gap: 1rem;
   margin-top: 1rem;
   flex-wrap: wrap;
+}
+
+.audio-waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0.4rem 0.25rem;
 }
 
 .audio-copy {
@@ -949,19 +999,27 @@ main {
 }
 
 .wave {
-  width: 8px;
-  height: 24px;
+  width: 6px;
+  height: 18px;
   border-radius: 999px;
-  background: linear-gradient(180deg, var(--orange), var(--navy));
-  animation: pulse 1.2s infinite ease-in-out;
+  background: linear-gradient(180deg, #ec4899, #0ea5e9);
+  animation: audioWave 1.4s infinite ease-in-out;
+  transform-origin: bottom center;
 }
 
-.wave:nth-child(2) { animation-delay: 0.2s; }
-.wave:nth-child(3) { animation-delay: 0.4s; }
+.wave:nth-child(1) { animation-delay: 0s; }
+.wave:nth-child(2) { animation-delay: 0.12s; }
+.wave:nth-child(3) { animation-delay: 0.24s; }
+.wave:nth-child(4) { animation-delay: 0.36s; }
+.wave:nth-child(5) { animation-delay: 0.18s; }
+.wave:nth-child(6) { animation-delay: 0.30s; }
+.wave:nth-child(7) { animation-delay: 0.45s; }
 
-@keyframes pulse {
-  0%, 100% { transform: scaleY(0.6); opacity: 0.8; }
-  50% { transform: scaleY(1.2); opacity: 1; }
+@keyframes audioWave {
+  0%, 100% { transform: scaleY(0.55); opacity: 0.5; }
+  25% { transform: scaleY(1.2); opacity: 1; }
+  50% { transform: scaleY(0.7); opacity: 0.7; }
+  75% { transform: scaleY(1.0); opacity: 0.9; }
 }
 
 @keyframes iconGlow {
@@ -1205,6 +1263,12 @@ main {
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
+.batch-card-thumb.audio-thumb {
+  width: min(340px, 100%);
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
 .batch-card {
   display: flex;
   flex-direction: column;
@@ -1231,6 +1295,48 @@ main {
 
 .ai-copy p {
   color: rgba(255,255,255,0.84);
+}
+
+.chat-card {
+  display: grid;
+  gap: 1rem;
+  background: rgba(255,255,255,0.08);
+  padding: 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.chat-body {
+  display: grid;
+  gap: 0.85rem;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 0.35rem;
+}
+
+.chat-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+#chatInput {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 0.98rem;
+  outline: none;
+}
+
+#chatInput::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.chat-form button {
+  width: 100%;
 }
 
 .chat-box {

@@ -219,6 +219,25 @@
             font-size: 1.25rem;
         }
 
+        .hero-right {
+            position: relative;
+            flex: 1 1 360px;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .hero-poster {
+            width: min(100%, 320px);
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+            object-fit: cover;
+            border: 1px solid rgba(14, 165, 233, 0.18);
+        }
+
         .hero-badge-text {
             font-size: 0.95rem;
             font-weight: 700;
@@ -554,6 +573,7 @@
             .hero-quote-text { font-size: 2rem; }
             .hero-actions { justify-content: center; }
             .test-grid { grid-template-columns: 1fr; }
+            .hero-poster { width: 100%; max-width: 100%; }
         }
     </style>
 </head>
@@ -606,6 +626,7 @@
                 </div>
 
                 <div class="hero-right">
+                    <img src="Asset/mock test _english_set poster.jpg" alt="Mock Test English Set Poster" class="hero-poster" />
                     <div class="hero-image-bg"></div>
                     <div class="offer-card">
                         <h3>Mock Test Set Selector</h3>
